@@ -1,0 +1,201 @@
+<!DOCTYPE HTML>
+<HTML>
+<head>
+<title>truYum</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> 
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
+  <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+  
+    <style>
+         .material-icons {
+        vertical-align: middle;
+            }
+        .navbar{
+            background-color: orangered;
+        }
+       .footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: orangered;
+   color: white;
+ 
+}
+               
+    </style>
+    </head>
+    <body>
+        
+        <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href=#><i class="material-icons">restaurant_menu</i>truYum</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#gg">
+            <span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="gg">
+        <ul class="navbar-nav ml-auto">
+        <li class="navbar-item active">
+                <a class="nav-link" href="menu-item-list.html">Menu Items</a>
+            </li>
+        </ul>
+        </div>
+        </nav>
+        
+        <div class="container-fluid">
+        <form onsubmit="return validateForm()" method="get">
+            <h1>Edit Menu Item</h1>
+           <div class="row">
+               <div class="col-12">
+               <div class="form-group">
+                   <label for="title">Item Name</label>
+            <input type="text" class="form-control" id="title" name="title" maxlength=200/></div>
+                <div id="status1" style="color: red;"></div>
+				<div id="status2" style="color: red;"></div>
+            
+               
+               </div>
+            </div> 
+            
+            <div class="row mt-1">
+                <div class="col-md-3">
+                    <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="text" class="form-control"  id="price" name="price" />
+                        <div id="status3" style="color: red;"></div>
+                        <div id="status4" style="color: red;"></div>
+                </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                     <label for="dateOfLaunch">Date Of Launch</label>
+                    <input type="text" class="form-control" id="dateOfLaunch" name="dateOfLaunch" placeholder="dd/mm/yyyy">
+                        <div id="status5" style="color: red;"></div>
+                </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        
+                        <label for="category">Category</label>
+                        <select class="form-control" id="category" name="category">
+                            <option value=""></option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                        </select>
+                    </div>
+                    <div id="status6" style="color: red;"></div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="active">Active</label><br>
+					<label class="radio-inline">
+						<input type="radio" id="active" name="active">Yes
+					</label>
+					<label class="radio-inline">
+						<input type="radio" id="active" name="active">No
+					</label>
+                        <div id="status7" style="color: red;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-1">
+            <div class="col-md-3">
+                <div class="form-group">
+                <label class="checkbox-inline">
+						<input type="checkbox" name="freeDelivery">
+					</label>
+						<label for="freeDelivery">Free Delivery</label>
+                </div>
+                <div class="status7"></div>
+                </div>
+            </div>
+            
+            <div class="row mt-3">
+            <div class="col-md-3">
+                <div class="form-group">
+                <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+                </div>
+            </div>
+            </form>
+        </div>
+        
+         <div class="footer">
+  <span class="foot-text">Copyright 2019</span>
+</div>
+        
+          
+		<script>
+			$('#dateoflaunch').datepicker({
+			uiLibrary: 'bootstrap4',
+			format: 'dd/mm/yyyy'
+			});
+			</script>
+			<script>
+			$("button").click(function(){
+			  $("button").removeClass("active");
+			  $(this).addClass("active");
+			});
+				
+			function validateForm() 
+			{
+			  	var title = document.getElementById("title").value;
+				var price = document.getElementById("price").value;
+                var date = document.getElementById("dateOfLaunch").value;
+                var active=document.getElementById("active").checked;
+                var category=document.getElementById("category").value;
+                var stat=0;
+			
+				  if (title == "") 
+				  {
+					document.getElementById("status1").innerHTML = "Item Name is required"; 
+					stat+=1;
+				  }
+					if(title.size >200)
+					{
+						document.getElementById("status2").innerHTML = "Item Name cannot exceed 200 characters"; 
+						stat+=1;
+					}
+				
+				if(price=="")
+					{
+						document.getElementById("status3").innerHTML = "Price is required"; 
+					   stat+=1;
+					}
+                var pregex = RegExp('^(\\d)*[\\.][\\d]{2}$');
+                if(pregex.test(price)==false){
+                    document.getElementById("status4").innerHTML="Price has to be a number"
+                stat+=1;
+                }
+                
+                var dregex=RegExp('^[\\d]{2}[/][\\d]{2}[/][\\d]{4}$');
+                if(dregex.test(date)==false)
+                    {
+                        document.getElementById("status5").innerHTML="Incorrect Date Format";
+                        stat+=1;
+                    }
+                if(active == false)
+                    {
+                        document.getElementById("status7").innerHTML="Select in stock status";
+                        stat+=1;
+                    }
+                if(category == '')
+                    {
+                        document.getElementById("status6").innerHTML="Select one category";
+                        stat+=1;
+                        
+                    }
+					
+				if(stat>0)
+                    return false;
+                return true;
+				
+			}
+		</script>
+    </body>
+</HTML>
